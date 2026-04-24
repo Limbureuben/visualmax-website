@@ -1,10 +1,17 @@
 <template>
   <div class="service-page">
-    <FloatingNav />
 
     <main>
       <section class="design-hero">
-        <div class="grid-overlay"></div>
+        <transition-group name="slide">
+          <div 
+            v-for="(img, idx) in images" 
+            :key="img"
+            v-show="activeIndex === idx"
+            class="hero-bg" 
+            :style="{ backgroundImage: `url(${img})` }"
+          ></div>
+        </transition-group>
         <div class="container reveal-item zoom-in-item">
           <span class="tag">Functional Art</span>
           <h1 class="hero-title">CREATIVE DESIGN</h1>
@@ -51,19 +58,26 @@
            </div>
         </div>
       </section>
-
-      <section class="footer-cta reveal-item">
-        <h2>Need a fresh look?</h2>
-        <NuxtLink to="/" class="cta-btn">Start Design</NuxtLink>
-        <NuxtLink to="/" class="back-home">Return to Home</NuxtLink>
-      </section>
     </main>
   </div>
 </template>
 
 <script setup lang="ts">
-import { onMounted } from 'vue'
+import { ref, onMounted, onUnmounted } from 'vue'
+
+const images = [
+  '/images/ourwork/creative1.png',
+  '/images/ourwork/creative2.png',
+  '/images/ourwork/creative3.png'
+]
+const activeIndex = ref(0)
+let slideInterval: any
+
 onMounted(() => {
+  slideInterval = setInterval(() => {
+    activeIndex.value = (activeIndex.value + 1) % images.length
+  }, 9000)
+
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
@@ -73,20 +87,28 @@ onMounted(() => {
   }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' })
   document.querySelectorAll('.reveal-item').forEach(item => observer.observe(item))
 })
+
+onUnmounted(() => {
+  if (slideInterval) clearInterval(slideInterval)
+})
 </script>
 
 <style scoped>
-.service-page { background: var(--background); color: var(--text); min-height: 100vh; font-family: 'Poppins', sans-serif; transition: background-color 0.4s, color 0.4s; }
+.service-page { padding-top: 96px; background: var(--background); color: var(--text); min-height: 100vh; font-family: 'Poppins', sans-serif; transition: background-color 0.4s, color 0.4s; }
 
-.design-hero { height: 60vh; display: flex; align-items: center; background: var(--surface); position: relative; }
-.grid-overlay { position: absolute; inset:0; background-image: radial-gradient(var(--accent) 1px, transparent 1px); background-size: 40px 40px; opacity: 0.05; }
-.design-hero h1 { font-size: clamp(40px, 8vw, 80px); font-weight: 800; margin-top: 10px; }
-.tag { color: #EF4056; font-weight: 700; letter-spacing: 4px; text-transform: uppercase; font-size: 14px; }
+.design-hero { height: 60vh; display: flex; align-items: center; justify-content: center; text-align: center; background: #000; position: relative; overflow: hidden; }
+.hero-bg { position: absolute; top:0; left:0; width:100%; height:110%; background-position: center; background-size: cover; z-index: 0; filter: brightness(1); }
+.slide-enter-active, .slide-leave-active { transition: transform 1.5s ease-in-out; }
+.slide-enter-from { transform: translateX(-100%); }
+.slide-leave-to { transform: translateX(100%); }
+.design-hero h1 { font-size: clamp(40px, 8vw, 80px); font-weight: 800; margin-top: 10px; color: #FFFFFF; position: relative; z-index: 2; text-shadow: 0 0 30px rgba(0,0,0,0.5); }
+.tag { color: var(--accent); font-weight: 700; letter-spacing: 4px; text-transform: uppercase; font-size: 14px; position: relative; z-index: 2; text-shadow: 0 0 10px rgba(0,0,0,0.5); }
+.design-hero p { position: relative; z-index: 2; color: #FFFFFF; text-shadow: 0 0 10px rgba(0,0,0,0.5); }
 
 .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
 .about-design { padding: 80px 0; text-align: center; max-width: 800px; margin: 0 auto; }
 .dim { color: var(--text-dim-extra); }
-.about-design h2 { font-size: 48px; margin-bottom: 20px; }
+.about-design h2 { font-size: 48px; margin-bottom: 20px; color: var(--text); }
 .about-design p { font-size: 20px; line-height: 1.8; color: var(--text-dim); }
 
 .design-services-grid { 
@@ -106,23 +128,23 @@ onMounted(() => {
 }
 .s-card:hover {
   transform: translateY(-10px);
-  border-color: #EF4056;
+  border-color: var(--secondary);
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
 }
 .card-icon {
   font-size: 14px;
   font-weight: 800;
-  color: #EF4056;
+  color: var(--secondary);
   margin-bottom: 20px;
   opacity: 0.6;
 }
-.s-card h3 { font-size: 22px; font-weight: 700; margin-bottom: 15px; transition: color 0.3s; }
-.s-card:hover h3 { color: #EF4056; }
-.s-card p { color: var(--text-dim-extra); line-height: 1.7; font-size: 15px; }
+.s-card h3 { font-size: 22px; font-weight: 700; margin-bottom: 15px; transition: color 0.3s; color: var(--text); }
+.s-card:hover h3 { color: var(--secondary); }
+.s-card p { color: var(--text-dim); line-height: 1.7; font-size: 15px; }
 
 .footer-cta { padding: 150px 0; text-align: center; }
-.cta-btn { background: #EF4056; color: #fff; padding: 18px 50px; border-radius: 50px; text-decoration: none; font-weight: 600; font-size: 18px; display: inline-block; margin-bottom: 20px; transition: transform 0.3s; }
-.cta-btn:hover { transform: scale(1.05); }
+.cta-btn { background: var(--secondary); color: #fff; padding: 18px 50px; border-radius: 50px; text-decoration: none; font-weight: 600; font-size: 18px; display: inline-block; margin-bottom: 20px; transition: transform 0.3s; }
+.cta-btn:hover { transform: scale(1.05); background: var(--accent); }
 .back-home { display: block; color: var(--text-dim-extra); text-decoration: none; }
 
 /* Reveal Logic */

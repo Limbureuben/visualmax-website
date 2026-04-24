@@ -1,6 +1,5 @@
 <template>
   <div class="contact-page">
-    <FloatingNav />
 
     <main>
       <!-- Contact Hero/Intro -->
@@ -56,14 +55,12 @@
               <h3 class="info-title">Contact Information</h3>
               <div class="info-links">
                 <div class="info-item">
-                  <div class="i-icon">📍</div>
                   <div class="i-text">
                     <strong>Location</strong>
                     <span>Mbezi Beach, Dar es Salaam, TZ</span>
                   </div>
                 </div>
                 <div class="info-item">
-                  <div class="i-icon">📞</div>
                   <div class="i-text">
                     <strong>Phone</strong>
                     <span>+255 714 686 167</span>
@@ -71,31 +68,12 @@
                   </div>
                 </div>
                 <div class="info-item">
-                  <div class="i-icon">✉️</div>
                   <div class="i-text">
                     <strong>Email</strong>
                     <span>info@visualmax.co.tz</span>
                   </div>
                 </div>
               </div>
-
-              <div class="social-box">
-                <h4>Follow our journey</h4>
-                <div class="social-icons">
-                  <a href="#" class="s-link" aria-label="Twitter">𝕏</a>
-                  <a href="#" class="s-link" aria-label="Facebook">f</a>
-                  <a href="#" class="s-link" aria-label="Instagram">ig</a>
-                  <a href="#" class="s-link" aria-label="LinkedIn">in</a>
-                </div>
-              </div>
-            </div>
-            
-            <div class="map-placeholder zoom-in-item reveal-item">
-              <div class="map-overlay">
-                <div class="location-dot"></div>
-                <span>Visualmax HQ</span>
-              </div>
-              <!-- In a real app we'd embed an iframe or Google Map here -->
             </div>
           </div>
         </div>
@@ -172,7 +150,7 @@ onMounted(() => {
 }
 
 .tag {
-  color: #EF4056;
+  color: var(--accent);
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 3px;
@@ -189,7 +167,7 @@ onMounted(() => {
 }
 
 .accent-text {
-  color: #EF4056;
+  color: var(--accent);
 }
 
 .hero-description {
@@ -219,6 +197,7 @@ onMounted(() => {
   border-radius: 20px;
   border: 1px solid var(--card-border);
   box-shadow: 0 30px 60px rgba(0,0,0,0.1);
+  position: relative; /* Context for absolute positioning if needed */
 }
 
 .form-title {
@@ -254,6 +233,7 @@ onMounted(() => {
   font-family: inherit;
   outline: none;
   transition: border-color 0.3s;
+  width: 100%; /* Ensure full width on mobile */
 }
 
 .input-group label {
@@ -272,17 +252,17 @@ onMounted(() => {
 .input-group textarea:not(:placeholder-shown) ~ label {
   top: -10px;
   font-size: 12px;
-  color: #EF4056;
+  color: var(--accent);
 }
 
 .input-group input:focus,
 .input-group textarea:focus {
-  border-color: #EF4056;
+  border-color: var(--accent);
 }
 
 .submit-btn {
   grid-column: span 2;
-  background: #EF4056;
+  background: var(--accent);
   color: #fff;
   border: none;
   padding: 20px 40px;
@@ -295,13 +275,13 @@ onMounted(() => {
   justify-content: center;
   gap: 12px;
   transition: all 0.3s;
-  box-shadow: 0 10px 30px rgba(239, 64, 86, 0.3);
+  box-shadow: 0 10px 30px rgba(249, 168, 34, 0.3);
   margin-top: 20px;
 }
 
 .submit-btn:hover:not(:disabled) {
   transform: translateY(-5px);
-  box-shadow: 0 15px 40px rgba(239, 64, 86, 0.5);
+  box-shadow: 0 15px 40px rgba(249, 168, 34, 0.5);
 }
 
 .submit-btn:disabled {
@@ -309,22 +289,50 @@ onMounted(() => {
   cursor: not-allowed;
 }
 
+/* Success Popup Style */
 .success-msg {
-  grid-column: span 2;
-  color: #4CAF50;
+  position: fixed;
+  top: 100px;
+  right: 20px;
+  background: #4CAF50; /* Green success color */
+  color: white;
+  padding: 16px 24px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
   font-weight: 600;
-  margin-top: 20px;
-  text-align: center;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  animation: slideInRight 0.5s ease-out forwards;
+}
+
+/* Optional icon for success message if you want to add one in the template later */
+.success-msg::before {
+  content: '✓';
+  display: inline-block;
+  font-weight: bold;
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
 /* Info Section Styling */
 .info-card {
-  background: #EF4056;
+  background: var(--accent);
   color: #fff;
   padding: 60px;
   border-radius: 20px;
   margin-bottom: 40px;
-  box-shadow: 0 30px 60px rgba(239, 64, 86, 0.2);
+  box-shadow: 0 30px 60px rgba(249, 168, 34, 0.2);
 }
 
 .info-title {
@@ -396,7 +404,7 @@ onMounted(() => {
 
 .s-link:hover {
   background: #fff;
-  color: #EF4056;
+  color: var(--accent);
   transform: translateY(-5px);
 }
 
@@ -435,17 +443,17 @@ onMounted(() => {
 .location-dot {
   width: 20px;
   height: 20px;
-  background: #EF4056;
+  background: var(--accent);
   border: 4px solid #fff;
   border-radius: 50%;
-  box-shadow: 0 0 20px rgba(239, 64, 86, 0.8);
+  box-shadow: 0 0 20px rgba(249, 168, 34, 0.8);
   animation: pulse 2s infinite;
 }
 
 @keyframes pulse {
-  0% { box-shadow: 0 0 0 0 rgba(239, 64, 86, 0.7); }
-  70% { box-shadow: 0 0 0 20px rgba(239, 64, 86, 0); }
-  100% { box-shadow: 0 0 0 0 rgba(239, 64, 86, 0); }
+  0% { box-shadow: 0 0 0 0 rgba(249, 168, 34, 0.7); }
+  70% { box-shadow: 0 0 0 20px rgba(249, 168, 34, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(249, 168, 34, 0); }
 }
 
 /* Animations */
@@ -483,19 +491,53 @@ onMounted(() => {
 @media (max-width: 768px) {
   .contact-hero {
     padding-top: 140px;
+    padding-bottom: 60px; /* Reduced bottom padding */
   }
+
+  .hero-title {
+    font-size: 42px; /* Smaller font on mobile */
+  }
+
   .container {
     padding: 0 20px;
   }
+
   .contact-form {
     grid-template-columns: 1fr;
     gap: 20px;
   }
+
   .full-width {
     grid-column: span 1;
   }
-  .contact-form-wrapper, .info-card {
+
+  .contact-form-wrapper {
+    padding: 30px 20px; /* Reduced padding */
+  }
+
+  .info-card {
     padding: 40px 25px;
+  }
+
+  /* Success message on mobile */
+  .success-msg {
+    top: 20px;
+    right: 50%;
+    transform: translateX(50%);
+    width: 90%;
+    justify-content: center;
+    animation: slideDown 0.5s ease-out forwards;
+  }
+
+  @keyframes slideDown {
+    from {
+      opacity: 0;
+      transform: translate(50%, -20px);
+    }
+    to {
+      opacity: 1;
+      transform: translate(50%, 0);
+    }
   }
 }
 </style>

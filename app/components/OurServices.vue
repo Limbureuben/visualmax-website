@@ -1,104 +1,116 @@
 <template>
   <section id="services" class="services-section" ref="sectionRef">
     <div class="container">
-      <h2 class="section-title reveal-item">OUR SERVICES</h2>
+      <h2 class="section-title reveal-on-scroll">OUR SERVICES</h2>
       
       <div class="services-grid">
         <!-- Column 1: Service List -->
         <div class="services-list-container">
-          <ul class="services-list">
-            <li class="service-item reveal-item" style="--delay: 1">
-              <NuxtLink to="/services/photography" class="service-link">
-                <span class="service-name">Photography</span>
-                <span class="view-indicator">View</span>
-                <span class="arrow">→</span>
-              </NuxtLink>
-            </li>
-            <li class="service-item highlight reveal-item" style="--delay: 2">
-              <NuxtLink to="/services/videography" class="service-link">
-                <span class="dot"></span>
-                <span class="service-name">Videography</span>
-                <span class="view-indicator">View</span>
-                <span class="arrow">→</span>
-              </NuxtLink>
-            </li>
-            <li class="service-item reveal-item" style="--delay: 3">
-              <NuxtLink to="/services/creative-design" class="service-link">
-                <span class="service-name">Creative design</span>
-                <span class="view-indicator">View</span>
-                <span class="arrow">→</span>
-              </NuxtLink>
-            </li>
-            <li class="service-item reveal-item" style="--delay: 4">
-              <NuxtLink to="/services/live-streaming" class="service-link">
-                <span class="service-name">Live streaming</span>
-                <span class="view-indicator">View</span>
-                <span class="arrow">→</span>
-              </NuxtLink>
-            </li>
-            <li class="service-item reveal-item" style="--delay: 5">
-              <NuxtLink to="/services/podcasting" class="service-link">
-                <span class="service-name">Podcasting</span>
-                <span class="view-indicator">View</span>
-                <span class="arrow">→</span>
-              </NuxtLink>
-            </li>
-            <li class="service-item reveal-item" style="--delay: 6">
-              <NuxtLink to="/services/led-rental" class="service-link">
-                <span class="service-name">LED Rental for events</span>
-                <span class="view-indicator">View</span>
-                <span class="arrow">→</span>
+          <ul class="services-list reveal-on-scroll">
+            <li 
+              v-for="(service, index) in services" 
+              :key="service.id"
+              class="service-item"
+              :class="{ 'highlight': activeService.id === service.id }"
+              @mouseenter="setActiveService(service)"
+            >
+              <NuxtLink :to="service.link" class="service-link">
+                <!-- Dot removed here, handled by CSS ::before -->
+                <span class="service-name">{{ service.title }}</span>
+                <!-- Indicators hidden via CSS or can be removed if strictly not needed -->
               </NuxtLink>
             </li>
           </ul>
         </div>
 
         <!-- Column 2: Description & CTA -->
-        <div class="services-content reveal-item" style="--delay: 7">
+        <div class="services-content reveal-on-scroll delay-200">
           <div class="description-container">
-            <p class="service-description">
-              We bring stories to life through high-quality media production. From concept to final delivery, we create compelling visuals and audio that connect brands with their audience
-            </p>
-            <!-- <p class="service-description">
-              We produce visually engaging videos that communicate your message clearly and creatively. From concept development to filming and post-production, we focus on storytelling, quality visuals, and professional execution for marketing, events, and digital platforms.
-            </p> -->
+            <transition name="fade" mode="out-in">
+              <p :key="activeService.id" class="service-description">
+                {{ activeService.description }}
+              </p>
+            </transition>
           </div>
           <button class="cta-button">Get in touch</button>
         </div>
 
         <!-- Column 3: Featured Image -->
-        <div class="services-image-container reveal-item" style="--delay: 8">
-          <img 
-            src="/images/ourwork/work2.jpeg" 
-            alt="Our Services" 
-            class="service-image"
-          />
+        <div class="services-image-container reveal-on-scroll delay-300">
+          <transition name="slide-left" mode="out-in">
+             <img 
+              :key="activeService.image"
+              :src="activeService.image" 
+              :alt="activeService.title" 
+              class="service-image"
+            />
+          </transition>
         </div>
       </div>
     </div>
   </section>
 </template>
 
-<script setup lang="ts">
-import { ref, onMounted } from 'vue'
+<script setup>
+import { ref } from 'vue'
 
-const sectionRef = ref<HTMLElement | null>(null)
-
-onMounted(() => {
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('is-visible')
-        observer.unobserve(entry.target)
-      }
-    })
-  }, { threshold: 0.1 })
-
-  if (sectionRef.value) {
-    const revealItems = sectionRef.value.querySelectorAll('.reveal-item')
-    revealItems.forEach((item) => observer.observe(item))
+const services = [
+  {
+    id: 'photography',
+    title: 'Photography',
+    link: '/services/photography',
+    description: 'We bring stories to life through high-quality photography. From concept to final delivery, we create compelling visuals that connect brands with their audience.',
+    image: '/images/ourwork/photo1.png'
+  },
+  {
+    id: 'videography',
+    title: 'Videography',
+    link: '/services/videography',
+    description: 'We produce visually engaging videos that communicate your message clearly and creatively. From concept development to filming and post-production, we focus on storytelling.',
+    image: '/images/ourwork/video1.png'
+  },
+  {
+    id: 'design',
+    title: 'Creative Design',
+    link: '/services/creative-design',
+    description: 'Exceptional creative design that transforms ideas into visual reality. We focus on brand identity, marketing materials, and digital assets that stand out.',
+    image: '/images/ourwork/creative2.png'
+  },
+  {
+    id: 'streaming',
+    title: 'Live Streaming',
+    link: '/services/live-streaming',
+    description: 'Professional live streaming services for events, conferences, and webinars. We ensure high-quality broadcasts with multi-camera setups and seamless audio.',
+    image: '/images/ourwork/stream2.png'
+  },
+  {
+    id: 'podcasting',
+    title: 'Podcasting',
+    link: '/services/podcasting',
+    description: 'Full-service podcast production including recording, editing, and distribution. Our studio offers the perfect environment for high-quality audio content.',
+    image: '/images/ourwork/pod1.png'
+  },
+  {
+    id: 'led',
+    title: 'LED Rental',
+    link: '/services/led-rental',
+    description: 'High-resolution LED screens for events of all sizes. We provide rental, setup, and technical support to ensure your visuals make a massive impact.',
+    image: '/images/ourwork/rental1.png'
+  },
+  {
+    id: 'management',
+    title: 'Influencer Management',
+    link: '/services/influencer-management',
+    description: 'Influencer marketing is more than followers. It’s about trust, relevance, and impact. We help brands build credibility and reach audiences through meaningful creator collaborations.',
+    image: '/images/ourwork/creative3.png'
   }
-})
+]
+
+const activeService = ref(services[0])
+
+const setActiveService = (service) => {
+  activeService.value = service
+}
 </script>
 
 <style scoped>
@@ -139,15 +151,19 @@ onMounted(() => {
   margin: 0;
   display: flex;
   flex-direction: column;
-  gap: 25px;
+  gap: 10px; /* Reduced gap */
 }
 
 .service-item {
   font-size: 24px;
-  color: var(--text-dim-extra);
+  color: var(--text); /* dynamic color for light/dark mode */
   position: relative;
   cursor: pointer;
-  transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+  transition: all 0.3s ease;
+  opacity: 1;
+  font-weight: 500;
+  border-bottom: none; /* Removed border */
+  border-radius: 8px; /* Added for hover effect */
 }
 
 .service-link {
@@ -157,98 +173,55 @@ onMounted(() => {
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  padding: 10px 0;
+  padding: 12px 15px; /* Reduced vertical padding, added horizontal */
 }
 
 .service-name {
   display: flex;
   align-items: center;
+  width: 100%;
 }
 
 .service-name::before {
-  content: "•";
+  content: ">"; /* Changed from dot to > */
   margin-right: 15px;
   font-size: 18px;
-  transition: transform 0.3s ease;
+  color: var(--text); /* dynamic color for light/dark mode */
+  transition: color 0.2s ease-in-out;
+  font-weight: 700; /* Make arrow bolder */
 }
 
-.service-item.highlight .service-name::before {
-  display: none;
-}
-
-.view-indicator {
-  font-size: 12px;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  color: #EF4056;
-  opacity: 0;
-  transform: translateX(-10px);
-  transition: all 0.4s ease;
-  font-weight: 700;
-}
-
-.arrow {
-  color: #EF4056;
-  opacity: 0;
-  transform: translateX(-20px);
-  transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
-  font-size: 24px;
-}
-
-.service-item:hover {
-  color: var(--text);
-  transform: translateX(10px);
-}
-
-.service-item:hover .view-indicator {
-  opacity: 0.6;
-  transform: translateX(0);
-}
-
-.service-item:hover .arrow {
-  opacity: 1;
-  transform: translateX(0);
-}
-
+.service-item.highlight .service-name::before,
 .service-item:hover .service-name::before {
-  transform: scale(1.5);
-  color: #EF4056;
+  color: var(--accent);
+}
+
+/* Hover & functional Active State */
+.service-item:hover, 
+.service-item.highlight {
+  color: var(--accent);
+  opacity: 1; /* Force opacity to stay 1 */
+  background-color: rgba(39, 141, 226, 0.1); /* Add view appearance background */
+  padding-left: 10px; /* Slight movement on hover */
 }
 
 .service-item.highlight {
-  color: #EF4056;
-  font-weight: 500;
+  font-weight: 600;
 }
 
-.service-item.highlight:hover {
-  transform: translateX(10px) scale(1.02);
-}
-
-.dot {
-  width: 6px;
-  height: 6px;
-  background-color: #EF4056;
-  border-radius: 50%;
-  margin-right: 15px;
-  display: inline-block;
-  transition: transform 0.3s ease;
-}
-
-.service-item:hover .dot {
-  transform: scale(1.5);
-}
-
+/* Image & Description containers */
 .services-content {
   display: flex;
   flex-direction: column;
   gap: 30px;
   padding-top: 5px;
+  min-height: 200px;
 }
 
 .description-container {
   display: flex;
   flex-direction: column;
-  gap: 15px; /* Reduced space between paragraphs */
+  gap: 15px;
 }
 
 .service-description {
@@ -259,7 +232,7 @@ onMounted(() => {
 }
 
 .cta-button {
-  background-color: #EF4056;
+  background-color: var(--accent);
   color: #fff;
   border: none;
   padding: 18px 40px;
@@ -272,42 +245,69 @@ onMounted(() => {
 }
 
 .cta-button:hover {
-  background-color: #d6384a;
+  background-color: #0d487c;
   transform: translateY(-2px);
 }
 
 .services-image-container {
   display: flex;
   justify-content: flex-end;
+  height: 400px; /* Fixed height to prevent layout jumps */
+  width: 100%;
+  position: relative;
 }
 
 .service-image {
   width: 100%;
   max-width: 400px;
+  height: 100%;
   border-radius: 30px;
   object-fit: cover;
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
-  transition: all 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
+  transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
 
-.service-image:hover {
-  transform: scale(1.05) rotate(1deg);
-  box-shadow: 0 30px 60px rgba(239, 64, 86, 0.2);
+/* Animations */
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+  transform: translateY(10px);
+}
+
+.slide-left-enter-active,
+.slide-left-leave-active {
+  transition: all 0.6s cubic-bezier(0.22, 1, 0.36, 1); /* Slower and smoother */
+}
+
+.slide-left-enter-from {
+  opacity: 0;
+  transform: translateX(-150px); /* Much larger starting distance */
+}
+
+.slide-left-leave-to {
+  opacity: 0;
+  transform: translateX(50px); /* Slide out to right slightly */
 }
 
 /* Reveal Animations */
-.reveal-item {
-  opacity: 0;
-  transform: translateY(40px);
-  transition: opacity 1.2s cubic-bezier(0.165, 0.84, 0.44, 1), 
-              transform 1.2s cubic-bezier(0.165, 0.84, 0.44, 1);
-  transition-delay: calc(var(--delay, 0) * 0.1s);
+.reveal-on-scroll {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 1s ease;
 }
 
-.reveal-item.is-visible {
-  opacity: 1;
-  transform: translateY(0);
+.reveal-on-scroll.revealed {
+    opacity: 1;
+    transform: translateY(0);
 }
+
+.delay-200 { transition-delay: 200ms; }
+.delay-300 { transition-delay: 300ms; }
 
 /* Responsiveness */
 @media (max-width: 1200px) {
@@ -319,6 +319,7 @@ onMounted(() => {
     grid-column: span 2;
     justify-content: center;
     margin-top: 40px;
+    height: 350px;
   }
   .service-image {
     max-width: 600px;
@@ -344,6 +345,7 @@ onMounted(() => {
   }
   .services-image-container {
     grid-column: auto;
+    height: 300px;
   }
   .section-title {
     text-align: center;

@@ -2,24 +2,24 @@
   <section class="our-work">
     <div class="container">
       <!-- Section Header -->
-      <div class="work-header reveal-item">
+      <div class="work-header reveal-on-scroll">
         <h2 class="work-title">OUR WORK</h2>
         <NuxtLink to="#" class="explore-btn">Explore more</NuxtLink>
       </div>
 
       <!-- Work Grid -->
       <div class="work-grid">
-        <div class="work-item reveal-item" style="--delay: 1">
+        <div class="work-item reveal-on-scroll delay-100">
           <div class="image-box">
             <img src="/images/ourwork/work1.jpeg" alt="Recent Project 1" />
           </div>
         </div>
-        <div class="work-item reveal-item" style="--delay: 2">
+        <div class="work-item reveal-on-scroll delay-200">
           <div class="image-box">
             <img src="/images/ourwork/work2.jpeg" alt="Recent Project 2" />
           </div>
         </div>
-        <div class="work-item reveal-item" style="--delay: 3">
+        <div class="work-item reveal-on-scroll delay-300">
           <div class="image-box">
             <img src="/images/ourwork/workimage2.png" alt="Recent Project 3" />
           </div>
@@ -28,22 +28,6 @@
     </div>
   </section>
 </template>
-
-<script setup lang="ts">
-import { onMounted } from 'vue'
-
-onMounted(() => {
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('is-visible')
-      }
-    })
-  }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' })
-  
-  document.querySelectorAll('.reveal-item').forEach(item => observer.observe(item))
-})
-</script>
 
 <style scoped>
 .our-work {
@@ -75,7 +59,7 @@ onMounted(() => {
 }
 
 .explore-btn {
-  background-color: #EF4056;
+  background-color: var(--accent);
   color: #fff;
   padding: 12px 30px;
   border-radius: 50px;
@@ -87,7 +71,7 @@ onMounted(() => {
 
 .explore-btn:hover {
   transform: scale(1.05);
-  box-shadow: 0 5px 20px rgba(239, 64, 86, 0.4);
+  box-shadow: 0 5px 20px rgba(249, 168, 34, 0.4);
 }
 
 .work-grid {

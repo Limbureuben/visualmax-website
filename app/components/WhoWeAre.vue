@@ -1,18 +1,18 @@
 <template>
   <section class="who-we-are">
     <div class="container">
-      <h2 class="section-title reveal-item">WHO WE ARE</h2>
+      <h2 class="section-title reveal-on-scroll">WHO WE ARE</h2>
       
       <div class="who-grid">
         <!-- Left Image -->
-        <div class="who-image-col reveal-item" style="--delay: 1">
+        <div class="who-image-col reveal-on-scroll delay-100 slide-left">
           <div class="image-wrapper">
             <img src="/images/whoweare/image1.png" alt="Creative Production" />
           </div>
         </div>
 
         <!-- Center Content -->
-        <div class="who-content-col reveal-item" style="--delay: 2">
+        <div class="who-content-col reveal-on-scroll delay-200">
           <div class="content-text">
             <p>We are a creative media production company dedicated to telling powerful stories through visuals and sound.</p>
             <p>With a strong focus on quality, creativity, and reliability, we work closely with our clients to understand their vision and transform it into engaging media content.</p>
@@ -22,7 +22,7 @@
         </div>
 
         <!-- Right Image -->
-        <div class="who-image-col reveal-item" style="--delay: 3">
+        <div class="who-image-col reveal-on-scroll delay-300 slide-right">
           <div class="image-wrapper">
             <img src="/images/whoweare/weareimage.png" alt="Photography Expertise" />
           </div>
@@ -31,22 +31,6 @@
     </div>
   </section>
 </template>
-
-<script setup lang="ts">
-import { onMounted } from 'vue'
-
-onMounted(() => {
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('is-visible')
-      }
-    })
-  }, { threshold: 0.1 })
-  
-  document.querySelectorAll('.reveal-item').forEach(item => observer.observe(item))
-})
-</script>
 
 <style scoped>
 .who-we-are {
@@ -111,7 +95,7 @@ onMounted(() => {
 
 .contact-btn {
   display: inline-block;
-  background-color: #EF4056;
+  background-color: var(--accent);
   color: #fff;
   padding: 12px 35px;
   border-radius: 50px;
@@ -124,7 +108,7 @@ onMounted(() => {
 
 .contact-btn:hover {
   transform: scale(1.05);
-  box-shadow: 0 5px 15px rgba(239, 64, 86, 0.4);
+  box-shadow: 0 5px 15px rgba(249, 168, 34, 0.4);
 }
 
 /* Animations */

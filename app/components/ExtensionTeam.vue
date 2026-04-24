@@ -1,21 +1,20 @@
 <template>
   <section class="extension-team">
     <div class="container">
-      <div class="extension-header reveal-item">
+      <div class="extension-header reveal-on-scroll">
         <h2 class="main-title">EXTENSION OF YOUR TEAM!</h2>
         <h3 class="sub-title">EXPECT WE DON'T</h3>
       </div>
       
       <div class="extension-grid">
         <!-- Left Image -->
-        <div class="extension-image-col reveal-item" style="--delay: 1">
+        <div class="extension-image-col reveal-on-scroll delay-100 slide-left">
           <div class="image-container">
             <img src="/images/extension/extensionimage.jpg" alt="Professional Camera Setup" />
           </div>
         </div>
 
-        <!-- Right Content -->
-        <div class="extension-content-col reveal-item" style="--delay: 2">
+        <div class="extension-content-col reveal-on-scroll delay-200">
           <div class="content-body">
             <h4 class="highlight-text">We believe in clear communication, professional execution, and reliable delivery</h4>
             <p>We work alongside individuals, brands, and organizations to deliver professional media and creative solutions. While we are not part of your internal team, we collaborate closely with you to understand your goals and bring your vision to life.</p>
@@ -27,22 +26,6 @@
     </div>
   </section>
 </template>
-
-<script setup lang="ts">
-import { onMounted } from 'vue'
-
-onMounted(() => {
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('is-visible')
-      }
-    })
-  }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' })
-  
-  document.querySelectorAll('.reveal-item').forEach(item => observer.observe(item))
-})
-</script>
 
 <style scoped>
 .extension-team {
@@ -125,7 +108,7 @@ onMounted(() => {
 
 .create-btn {
   display: inline-block;
-  background-color: #EF4056;
+  background-color: var(--accent);
   color: #fff;
   padding: 14px 40px;
   border-radius: 50px;
@@ -138,7 +121,7 @@ onMounted(() => {
 
 .create-btn:hover {
   transform: translateY(-3px);
-  box-shadow: 0 10px 20px rgba(239, 64, 86, 0.4);
+  box-shadow: 0 10px 20px rgba(249, 168, 34, 0.4);
 }
 
 /* Entry Animations */

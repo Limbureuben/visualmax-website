@@ -1,6 +1,5 @@
 <template>
   <div class="team-page">
-    <FloatingNav />
 
     <main>
       <!-- Team Hero Section -->
@@ -72,17 +71,6 @@
             <div class="v-icon">🎯</div>
             <h3>Excellence</h3>
             <p>We don't just deliver content; we deliver results that exceed expectations and resonate with audiences.</p>
-          </div>
-        </div>
-      </section>
-
-      <!-- Join Us Section -->
-      <section class="join-us reveal-item">
-        <div class="container join-container">
-          <div class="join-content">
-            <h2>Work with the best.</h2>
-            <p>We're always looking for fresh talent and creative minds. Think you'd be a great fit?</p>
-            <NuxtLink to="/#contact" class="cta-btn secondary">View Openings</NuxtLink>
           </div>
         </div>
       </section>
@@ -181,7 +169,7 @@ onMounted(() => {
 }
 
 .tag {
-  color: #EF4056;
+  color: var(--accent);
   font-weight: 700;
   font-size: 16px;
   text-transform: uppercase;
@@ -205,7 +193,7 @@ onMounted(() => {
 }
 
 .cta-btn {
-  background: #EF4056;
+  background: var(--accent);
   color: #fff;
   padding: 16px 40px;
   border-radius: 50px;
@@ -213,12 +201,12 @@ onMounted(() => {
   font-weight: 600;
   display: inline-block;
   transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
-  box-shadow: 0 10px 30px rgba(239, 64, 86, 0.3);
+  box-shadow: 0 10px 30px rgba(249, 168, 34, 0.3);
 }
 
 .cta-btn:hover {
   transform: translateY(-5px);
-  box-shadow: 0 15px 40px rgba(239, 64, 86, 0.5);
+  box-shadow: 0 15px 40px rgba(249, 168, 34, 0.5);
 }
 
 /* Team Showcase Layout (Right Side) */
@@ -283,7 +271,7 @@ onMounted(() => {
 }
 
 .member-role {
-  color: #EF4056;
+  color: var(--accent);
   font-weight: 700;
   font-size: 14px;
   text-transform: uppercase;
@@ -324,7 +312,7 @@ onMounted(() => {
 }
 
 .social-link:hover {
-  background: #EF4056 !important;
+  background: var(--accent) !important;
   color: #fff !important;
   transform: translateY(-5px) rotate(8deg);
 }
@@ -376,9 +364,9 @@ onMounted(() => {
 }
 
 .arrow-btn:hover {
-  background: #EF4056;
+  background: var(--accent);
   color: #fff;
-  border-color: #EF4056;
+  border-color: var(--accent);
   transform: scale(1.1);
 }
 
@@ -404,7 +392,7 @@ onMounted(() => {
 
 .value-card:hover {
   transform: translateY(-10px);
-  border-color: #EF4056;
+  border-color: var(--accent);
 }
 
 .v-icon {
@@ -444,13 +432,13 @@ onMounted(() => {
 
 .cta-btn.secondary {
   background: transparent;
-  border: 2px solid #EF4056;
+  border: 2px solid var(--accent);
   color: var(--text);
   box-shadow: none;
 }
 
 .cta-btn.secondary:hover {
-  background: #EF4056;
+  background: var(--accent);
   color: #fff;
 }
 

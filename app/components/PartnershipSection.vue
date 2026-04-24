@@ -2,13 +2,13 @@
   <section class="partnership">
     <div class="container partnership-grid">
       <!-- Left Content -->
-      <div class="partnership-text reveal-item">
+      <div class="partnership-text reveal-on-scroll">
         <h2 class="cta-heading">LET'S TAKE OUR RELATIONSHIP TO THE NEXT LEVEL</h2>
         <NuxtLink to="/contact" class="partnership-btn">Start a patinership</NuxtLink>
       </div>
 
       <!-- Right Image -->
-      <div class="partnership-img-col reveal-item" style="--delay: 2">
+      <div class="partnership-img-col reveal-on-scroll delay-200">
         <div class="img-box">
           <img src="/images/ourwork/work1.jpeg" alt="Partner with Visualmax" />
         </div>
@@ -16,22 +16,6 @@
     </div>
   </section>
 </template>
-
-<script setup lang="ts">
-import { onMounted } from 'vue'
-
-onMounted(() => {
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('is-visible')
-      }
-    })
-  }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' })
-  
-  document.querySelectorAll('.reveal-item').forEach(item => observer.observe(item))
-})
-</script>
 
 <style scoped>
 .partnership {
@@ -65,7 +49,7 @@ onMounted(() => {
 
 .partnership-btn {
   display: inline-block;
-  background-color: #EF4056;
+  background-color: var(--accent);
   color: #fff;
   padding: 18px 45px;
   border-radius: 60px;
@@ -77,7 +61,7 @@ onMounted(() => {
 
 .partnership-btn:hover {
   transform: translateY(-5px);
-  box-shadow: 0 10px 30px rgba(239, 64, 86, 0.4);
+  box-shadow: 0 10px 30px rgba(249, 168, 34, 0.4);
 }
 
 .img-box {

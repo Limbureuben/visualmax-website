@@ -2,7 +2,7 @@
   <section class="prepared-powered">
     <div class="container grid-layout">
       <!-- Left Content -->
-      <div class="content-side reveal-item">
+      <div class="content-side reveal-on-scroll">
         <h2 class="section-title">Prepared & Powered by</h2>
         <p class="description">
           This page highlights the partners, tools, and teams that help prepare and power our work. 
@@ -11,7 +11,7 @@
       </div>
 
       <!-- Right Logo Grid (Stylized Text) -->
-      <div class="partner-side reveal-item" style="--delay: 2">
+      <div class="partner-side reveal-on-scroll delay-200">
         <div class="partner-grid">
           <div v-for="(partner, index) in partners" :key="index" class="partner-card">
             <span class="partner-text">{{ partner }}</span>
@@ -23,8 +23,6 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted } from 'vue'
-
 const partners = [
   'Vision media',
   'Create lab',
@@ -33,18 +31,6 @@ const partners = [
   'Elite AV',
   'Motion studio'
 ]
-
-onMounted(() => {
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('is-visible')
-      }
-    })
-  }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' })
-  
-  document.querySelectorAll('.reveal-item').forEach(item => observer.observe(item))
-})
 </script>
 
 <style scoped>

@@ -1,10 +1,20 @@
 <template>
   <div class="service-page">
-    <FloatingNav />
 
     <main>
+      <!-- Live Streaming Hero with Slider -->
       <section class="streaming-hero">
-        <div class="glow-bg"></div>
+        <transition-group name="slide">
+          <div 
+            v-for="(img, idx) in images" 
+            :key="img"
+            v-show="activeIndex === idx"
+            class="slide-wrapper" 
+          >
+            <div class="hero-bg" :style="{ backgroundImage: `url(${img})` }"></div>
+          </div>
+        </transition-group>
+        <div class="hero-overlay"></div>
         <div class="container reveal-item zoom-in-item">
           <span class="tag">Zero Latency</span>
           <h1 class="hero-title">LIVE STREAMING</h1>
@@ -52,19 +62,27 @@
            <div class="cap-card-v2"><span>Simulcast</span></div>
         </div>
       </section>
-
-      <section class="footer-cta reveal-item">
-        <h2>Ready to go live?</h2>
-        <NuxtLink to="/" class="cta-btn">Book Stream</NuxtLink>
-        <NuxtLink to="/" class="back-home">Return to Home</NuxtLink>
-      </section>
     </main>
   </div>
 </template>
 
 <script setup lang="ts">
-import { onMounted } from 'vue'
+import { ref, onMounted, onUnmounted } from 'vue'
+
+const images = [
+  '/images/ourwork/stream1.png',
+  '/images/ourwork/stream2.png',
+  '/images/ourwork/stream3.png',
+  '/images/ourwork/stream4.png'
+]
+const activeIndex = ref(0)
+let slideInterval: any
+
 onMounted(() => {
+  slideInterval = setInterval(() => {
+    activeIndex.value = (activeIndex.value + 1) % images.length
+  }, 9000)
+
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
@@ -74,44 +92,55 @@ onMounted(() => {
   }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' })
   document.querySelectorAll('.reveal-item').forEach(item => observer.observe(item))
 })
+
+onUnmounted(() => {
+  if (slideInterval) clearInterval(slideInterval)
+})
 </script>
 
 <style scoped>
-.service-page { background: var(--background); color: var(--text); min-height: 100vh; font-family: 'Poppins', sans-serif; transition: background-color 0.4s, color 0.4s; }
+.service-page { padding-top: 96px; background: var(--background); color: var(--text); min-height: 100vh; font-family: 'Poppins', sans-serif; transition: background-color 0.4s, color 0.4s; }
 
-.streaming-hero { height: 60vh; display: flex; align-items: center; justify-content: center; text-align: center; background: var(--surface); position: relative; overflow: hidden; }
-.glow-bg { position: absolute; width: 1000px; height: 1000px; background: radial-gradient(circle, var(--accent) 0%, transparent 70%); top: -300px; right: -300px; opacity: 0.1; pointer-events: none; }
-.streaming-hero h1 { font-size: clamp(40px, 8vw, 80px); font-weight: 800; margin-top: 10px; text-shadow: 0 0 30px rgba(239, 64, 86, 0.2); }
-.tag { color: #EF4056; font-weight: 700; letter-spacing: 4px; text-transform: uppercase; font-size: 14px; }
+.streaming-hero { height: 60vh; display: flex; align-items: center; justify-content: center; text-align: center; position: relative; overflow: hidden; background: #000; }
+.slide-wrapper { position: absolute; top:0; left:0; width:100%; height:110%; z-index:0; }
+.hero-bg { width:100%; height:100%; background-position: center; background-size: cover; filter: brightness(1); }
+.slide-enter-active, .slide-leave-active { transition: transform 1.5s ease-in-out; }
+.slide-enter-from { transform: translateX(-100%); }
+.slide-leave-to { transform: translateX(100%); }
+.hero-overlay { position:absolute; top:0; left:0; width:100%; height:100%; background: none; z-index:1; }
+.hero-content-streaming { position: relative; z-index: 2; }
+.streaming-hero h1 { font-size: clamp(40px, 8vw, 80px); font-weight: 800; margin-top: 10px; text-shadow: 0 0 30px rgba(0,0,0,0.5); color: #FFFFFF; }
+.tag { color: var(--accent); font-weight: 700; letter-spacing: 4px; text-transform: uppercase; font-size: 14px; text-shadow: 0 0 10px rgba(0,0,0,0.5); }
+.streaming-hero p { position: relative; z-index: 2; color: #FFFFFF; text-shadow: 0 0 10px rgba(0,0,0,0.5); }
 
 .container { max-width: 1240px; margin: 0 auto; padding: 0 40px; }
-.section-label { color: #EF4056; font-weight: 700; font-size: 12px; letter-spacing: 3px; text-transform: uppercase; display: block; margin-bottom: 25px; }
+.section-label { color: var(--secondary); font-weight: 700; font-size: 12px; letter-spacing: 3px; text-transform: uppercase; display: block; margin-bottom: 25px; }
 
 .streaming-content { padding: 100px 0; }
 .stream-intro { text-align: center; max-width: 800px; margin: 0 auto 80px; }
-.stream-intro h2 { font-size: 52px; margin-bottom: 25px; font-weight: 800; }
+.stream-intro h2 { font-size: 52px; margin-bottom: 25px; font-weight: 800; color: var(--text); }
 .dim { color: var(--text-dim-extra); }
 .stream-intro p { font-size: 20px; line-height: 1.8; color: var(--text-dim); }
 
 .stream-details-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-bottom: 80px; }
 .stream-block { padding: 80px 60px; background: var(--surface); border-radius: 40px; border: 1px solid var(--card-border); transition: all 0.4s; display: flex; flex-direction: column; align-items: flex-start; text-align: left; }
-.stream-block:hover { border-color: rgba(239, 64, 86, 0.4); transform: translateY(-10px); box-shadow: 0 30px 60px rgba(0,0,0,0.15); }
-.block-title { font-size: 32px; font-weight: 800; margin-bottom: 40px; line-height: 1.2; letter-spacing: -1px; }
+.stream-block:hover { border-color: var(--secondary); transform: translateY(-10px); box-shadow: 0 30px 60px rgba(0,0,0,0.15); }
+.block-title { font-size: 32px; font-weight: 800; margin-bottom: 40px; line-height: 1.2; letter-spacing: -1px; color: var(--text); }
 
 .feature-list { list-style: none; padding:0; margin:0; display: flex; flex-direction: column; gap: 20px; width: 100%; }
 .feature-list li { display: flex; align-items: center; gap: 15px; font-size: 18px; font-weight: 600; color: var(--text-dim); border-bottom: 1px solid var(--card-border); padding-bottom: 15px; }
 .feature-list li:last-child { border-bottom: none; }
 .feature-list.highlight li { color: var(--text); }
-.dot { width: 8px; height: 8px; background: #EF4056; border-radius: 50%; flex-shrink: 0; transition: transform 0.3s; }
+.dot { width: 8px; height: 8px; background: var(--secondary); border-radius: 50%; flex-shrink: 0; transition: transform 0.3s; }
 .stream-block:hover .dot { transform: scale(1.5); }
 
 .stream-capabilities-v2 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
-.cap-card-v2 { padding: 25px; background: var(--surface); border-radius: 20px; text-align: center; border: 1px solid var(--card-border); font-weight: 800; color: #EF4056; font-size: 14px; text-transform: uppercase; letter-spacing: 1px; }
+.cap-card-v2 { padding: 25px; background: var(--surface); border-radius: 20px; text-align: center; border: 1px solid var(--card-border); font-weight: 800; color: var(--secondary); font-size: 14px; text-transform: uppercase; letter-spacing: 1px; }
 
 .reveal-item[style*="--delay"] { transition-delay: calc(var(--delay) * 0.1s); }
 
 .footer-cta { padding: 150px 0; text-align: center; }
-.cta-btn { background: #EF4056; color: #fff; padding: 18px 50px; border-radius: 50px; text-decoration: none; font-weight: 600; font-size: 18px; display: inline-block; margin-bottom: 20px; transition: transform 0.3s; }
+.cta-btn { background: var(--secondary); color: #fff; padding: 18px 50px; border-radius: 50px; text-decoration: none; font-weight: 600; font-size: 18px; display: inline-block; margin-bottom: 20px; transition: transform 0.3s; }
 .cta-btn:hover { transform: scale(1.05); }
 .back-home { display: block; color: var(--text-dim-extra); text-decoration: none; }
 
