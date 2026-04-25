@@ -34,7 +34,6 @@
             </div>
           </div>
           <NuxtLink to="/team" class="nav-link">About Us</NuxtLink>
-          <NuxtLink to="#contact" class="nav-link">Contact</NuxtLink>
         </nav>
 
         <div class="header-actions">
@@ -76,7 +75,6 @@
                </div>
             </div>
             <NuxtLink to="/team" class="mobile-link" @click="isMenuOpen = false">About Us</NuxtLink>
-            <NuxtLink to="#contact" class="mobile-link" @click="isMenuOpen = false">Contact</NuxtLink>
             <button @click="$emit('open-booking'); isMenuOpen = false" class="booking-btn-mobile">Book Now</button>
           </nav>
         </div>
