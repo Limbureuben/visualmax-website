@@ -148,7 +148,7 @@ onUnmounted(() => {
 </script>
 
 <style scoped>
-.service-page { padding-top: 96px; background: var(--background); color: var(--text); min-height: 100vh; overflow-x: hidden; font-family: 'Poppins', sans-serif; transition: background-color 0.4s, color 0.4s; }
+.service-page { background: var(--background); color: var(--text); min-height: 100vh; overflow-x: hidden; font-family: 'Poppins', sans-serif; transition: background-color 0.4s, color 0.4s; }
 
 /* Hero Section */
 .pod-hero { position: relative; height: 60vh; display: flex; align-items: center; justify-content: center; text-align: center; overflow: hidden; background: #000; }

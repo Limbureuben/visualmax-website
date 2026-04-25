@@ -20,7 +20,7 @@
             <p>We work alongside individuals, brands, and organizations to deliver professional media and creative solutions. While we are not part of your internal team, we collaborate closely with you to understand your goals and bring your vision to life.</p>
             <p class="footer-note">Creative media solutions that support your vision and deliver quality results</p>
           </div>
-          <NuxtLink to="/contact" class="create-btn">Let's create</NuxtLink>
+          <NuxtLink to="#contact" class="create-btn">Let's create</NuxtLink>
         </div>
       </div>
     </div>

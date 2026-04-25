@@ -32,7 +32,7 @@
               </p>
             </transition>
           </div>
-          <button class="cta-button">Get in touch</button>
+          <button class="cta-button" @click="openBooking">Get in touch</button>
         </div>
 
         <!-- Column 3: Featured Image -->
@@ -111,14 +111,18 @@ const activeService = ref(services[0])
 const setActiveService = (service) => {
   activeService.value = service
 }
+
+const isBookingOpen = useState('isBookingOpen')
+const openBooking = () => {
+  isBookingOpen.value = true
+}
 </script>
 
 <style scoped>
 .services-section {
   background-color: var(--background);
   color: var(--text);
-  padding: 100px 60px;
-  min-height: 100vh;
+  padding: 100px 60px 40px;
   display: flex;
   align-items: center;
   font-family: 'Poppins', sans-serif;

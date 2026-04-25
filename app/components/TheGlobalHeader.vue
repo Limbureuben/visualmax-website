@@ -1,5 +1,5 @@
 <template>
-  <header class="header" :class="{ 'is-scrolled': isScrolled || !isHomePage }">
+  <header class="header" :class="{ 'is-scrolled': isScrolled || !isHomePage, 'is-static': !isHomePage }">
     <div class="main-header">
       <div class="header-left">
         <NuxtLink to="/" class="logo-link">
@@ -34,7 +34,7 @@
             </div>
           </div>
           <NuxtLink to="/team" class="nav-link">About Us</NuxtLink>
-          <NuxtLink to="/contact" class="nav-link">Contact</NuxtLink>
+          <NuxtLink to="#contact" class="nav-link">Contact</NuxtLink>
         </nav>
 
         <div class="header-actions">
@@ -49,7 +49,7 @@
              </div>
           </button>
 
-          <button class="hamburger mobile-only" @click="isMenuOpen = !isMenuOpen" :class="{ 'is-active': isMenuOpen }">
+          <button class="hamburger" @click="isMenuOpen = !isMenuOpen" :class="{ 'is-active': isMenuOpen }">
             <span></span><span></span><span></span>
           </button>
         </div>
@@ -76,7 +76,7 @@
                </div>
             </div>
             <NuxtLink to="/team" class="mobile-link" @click="isMenuOpen = false">About Us</NuxtLink>
-            <NuxtLink to="/contact" class="mobile-link" @click="isMenuOpen = false">Contact</NuxtLink>
+            <NuxtLink to="#contact" class="mobile-link" @click="isMenuOpen = false">Contact</NuxtLink>
             <button @click="$emit('open-booking'); isMenuOpen = false" class="booking-btn-mobile">Book Now</button>
           </nav>
         </div>
@@ -151,6 +151,11 @@ onUnmounted(() => {
   background: var(--header-scrolled);
   backdrop-filter: blur(15px);
   box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+}
+
+.header.is-static {
+  position: relative !important;
+  transition: none !important;
 }
 
 .main-header {
@@ -437,7 +442,12 @@ onUnmounted(() => {
 @media (max-width: 850px) {
   .desktop-only { display: none; }
   .hamburger { display: flex; }
-  .main-header { padding: 15px 25px; }
+  .main-header { padding: 15px 20px; }
+  .header.is-scrolled .main-header { padding: 10px 20px; }
+  .header-actions { gap: 12px; }
+  
+  .logo-img { height: 60px; }
+  .header.is-scrolled .logo-img { height: 45px; }
 }
 
 .fade-enter-active, .fade-leave-active { transition: opacity 0.3s ease; }

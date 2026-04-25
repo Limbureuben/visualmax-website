@@ -4,7 +4,7 @@
       <!-- Left Content -->
       <div class="partnership-text reveal-on-scroll">
         <h2 class="cta-heading">LET'S TAKE OUR RELATIONSHIP TO THE NEXT LEVEL</h2>
-        <NuxtLink to="/contact" class="partnership-btn">Start a patinership</NuxtLink>
+        <NuxtLink to="#contact" class="partnership-btn">Start a patinership</NuxtLink>
       </div>
 
       <!-- Right Image -->

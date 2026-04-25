@@ -18,7 +18,7 @@
             <p>With a strong focus on quality, creativity, and reliability, we work closely with our clients to understand their vision and transform it into engaging media content.</p>
             <p>From planning and production to final delivery, we ensure every project meets high production standards.</p>
           </div>
-          <NuxtLink to="/contact" class="contact-btn">Contact us</NuxtLink>
+          <NuxtLink to="#contact" class="contact-btn">Contact us</NuxtLink>
         </div>
 
         <!-- Right Image -->
@@ -34,7 +34,7 @@
 
 <style scoped>
 .who-we-are {
-  padding: 120px 0;
+  padding: 60px 0 120px;
   background-color: var(--background);
   color: var(--text);
   overflow: hidden;

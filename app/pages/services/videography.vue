@@ -113,7 +113,7 @@ onUnmounted(() => {
 </script>
 
 <style scoped>
-.service-page { padding-top: 96px; background: var(--background); color: var(--text); min-height: 100vh; font-family: 'Poppins', sans-serif; overflow-x: hidden; transition: background-color 0.4s, color 0.4s; }
+.service-page { background: var(--background); color: var(--text); min-height: 100vh; font-family: 'Poppins', sans-serif; overflow-x: hidden; transition: background-color 0.4s, color 0.4s; }
 .video-hero { position: relative; height: 80vh; display: flex; align-items: center; justify-content: center; text-align: center; overflow: hidden; background: #000; }
 .slide-wrapper { position: absolute; top:0; left:0; width:100%; height:110%; z-index:0; }
 .video-bg-placeholder { width:100%; height:100%; background-position: center; background-size: cover; filter: brightness(1); }

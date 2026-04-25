@@ -99,7 +99,7 @@ onUnmounted(() => {
 </script>
 
 <style scoped>
-.service-page { padding-top: 96px; background: var(--background); color: var(--text); min-height: 100vh; font-family: 'Poppins', sans-serif; transition: background-color 0.4s, color 0.4s; }
+.service-page { background: var(--background); color: var(--text); min-height: 100vh; font-family: 'Poppins', sans-serif; transition: background-color 0.4s, color 0.4s; }
 
 .streaming-hero { height: 60vh; display: flex; align-items: center; justify-content: center; text-align: center; position: relative; overflow: hidden; background: #000; }
 .slide-wrapper { position: absolute; top:0; left:0; width:100%; height:110%; z-index:0; }

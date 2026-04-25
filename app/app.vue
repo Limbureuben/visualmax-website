@@ -13,7 +13,7 @@ import { onMounted, watch, nextTick } from 'vue'
 import { useRoute } from 'vue-router'
 
 const route = useRoute()
-const isBookingOpen = ref(false)
+const isBookingOpen = useState('isBookingOpen', () => false)
 
 const openBooking = () => {
   isBookingOpen.value = true

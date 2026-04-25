@@ -390,13 +390,13 @@ textarea {
 /* Responsive */
 @media (max-width: 768px) {
   .modal-overlay {
-    padding: 10px;
-    align-items: flex-start;
-    padding-top: 20px;
+    padding: 15px;
+    align-items: center;
+    padding-top: 15px;
   }
 
   .modal-container {
-    max-height: calc(100vh - 40px);
+    max-height: 90vh; /* Using safer vh over calc for mobile */
     border-radius: 16px;
   }
 
@@ -439,12 +439,12 @@ textarea {
 
 @media (max-width: 480px) {
   .modal-overlay {
-    padding: 5px;
-    padding-top: 10px;
+    padding: 10px;
+    align-items: center;
   }
 
   .modal-container {
-    max-height: calc(100vh - 20px);
+    max-height: 92vh;
     border-radius: 12px;
   }
 

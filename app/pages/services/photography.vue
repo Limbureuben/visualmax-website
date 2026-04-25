@@ -134,7 +134,7 @@ onUnmounted(() => {
 </script>
 
 <style scoped>
-.service-page { padding-top: 96px; background: var(--background); color: var(--text); min-height: 100vh; font-family: 'Poppins', sans-serif; overflow-x: hidden; transition: background-color 0.4s, color 0.4s; }
+.service-page { background: var(--background); color: var(--text); min-height: 100vh; font-family: 'Poppins', sans-serif; overflow-x: hidden; transition: background-color 0.4s, color 0.4s; }
 
 .menu-footer p { font-size: 18px; font-weight: 600; }
 
@@ -164,7 +164,7 @@ onUnmounted(() => {
 .photo-text-block p { font-size: 18px; line-height: 1.8; color: var(--text-dim); margin-bottom: 25px; }
 
 /* Image Reveal */
-.image-reveal-wrapper { overflow: hidden; border-radius: 40px; position: relative; }
+.image-reveal-wrapper { overflow: hidden; border-radius: 0px; position: relative; }
 .image-reveal-wrapper::after { content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: var(--secondary); transform: translateY(100%); transition: transform 0.8s cubic-bezier(0.165, 0.84, 0.44, 1); }
 .reveal-item.is-visible .image-reveal-wrapper::after { transform: translateY(-100%); }
 .large-display-img { width: 100%; transform: scale(1.1); transition: transform 1.2s cubic-bezier(0.165, 0.84, 0.44, 1); }

@@ -1,6 +1,38 @@
 <template>
   <footer class="the-footer">
-    <div class="container">
+    <!-- Contact Us Section with Sliding Background -->
+    <div id="contact" class="footer-contact-hero">
+      <transition-group name="fade-slide">
+        <div 
+          v-for="(slide, idx) in slides" 
+          :key="slide"
+          v-show="currentSlide === idx"
+          class="contact-slide-bg"
+          :style="{ backgroundImage: `url(${slide})` }"
+        ></div>
+      </transition-group>
+      <div class="contact-overlay"></div>
+
+      <div class="contact-box-container">
+        <div class="contact-box">
+          <h2 class="contact-title">Ready to<br>Build<br>Something<br>Real?</h2>
+          
+          <form @submit.prevent="submitContact" class="contact-form">
+            <input type="text" v-model="form.name" placeholder="Your Name" required class="contact-input" />
+            <input type="email" v-model="form.email" placeholder="Your Email" required class="contact-input" />
+            <input type="text" v-model="form.subject" placeholder="Project Subject" required class="contact-input" />
+            <textarea v-model="form.message" placeholder="Your idea about the project" required class="contact-input textarea" rows="5"></textarea>
+            
+            <button type="submit" class="submit-collab-btn" :disabled="isSubmitting">
+              <span v-if="!isSubmitting">Let's Collaborate</span>
+              <span v-else>Sending...</span>
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div class="container main-footer-container">
       <!-- Top Row: Logo & Social -->
       <div class="footer-top">
         <div class="footer-logo">
@@ -9,7 +41,11 @@
         <div class="social-links">
           <!-- Instagram -->
           <a href="https://www.instagram.com/visualmax.tz" target="_blank" rel="noopener noreferrer" class="social-btn" aria-label="Instagram">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163C15.204 2.163 15.584 2.175 16.85 2.232C18.114 2.29 18.973 2.503 19.724 2.795C20.5 3.097 21.157 3.504 21.81 4.157C22.463 4.81 22.87 5.467 23.172 6.243C23.464 6.994 23.677 7.853 23.734 9.118C23.791 10.383 23.803 10.764 23.803 13.968C23.803 17.172 23.791 17.553 23.734 18.818C23.677 20.083 23.464 20.942 23.172 21.693C22.87 22.469 22.463 23.126 21.81 23.779C21.157 24.432 20.5 24.839 19.724 25.141C18.973 25.433 18.114 25.646 16.85 25.704C15.584 25.761 15.204 25.773 12 25.773C8.796 25.773 8.416 25.761 7.15 25.704C5.886 25.646 5.027 25.433 4.276 25.141C3.5 24.839 2.843 24.432 2.19 23.779C1.537 23.126 1.13 22.469 0.828 21.693C0.536 20.942 0.323 20.083 0.266 18.818C0.209 17.553 0.197 17.172 0.197 13.968C0.197 10.764 0.209 10.383 0.266 9.118C0.323 7.853 0.536 6.994 0.828 6.243C1.13 5.467 1.537 4.81 2.19 4.157C2.843 3.504 3.5 3.097 4.276 2.795C5.027 2.503 5.886 2.29 7.15 2.232C8.416 2.175 8.796 2.163 12 2.163ZM12 0C8.741 0 8.333 0.014 7.053 0.072C5.775 0.13 4.902 0.333 4.14 0.63C3.353 0.936 2.686 1.348 2.019 2.015C1.352 2.682 0.94 3.349 0.634 4.136C0.337 4.898 0.134 5.771 0.076 7.049C0.018 8.329 0.004 8.737 0.004 11.996C0.004 15.255 0.018 15.663 0.076 16.943C0.134 18.221 0.337 19.094 0.634 19.856C0.94 20.643 1.352 21.31 2.019 21.977C2.686 22.644 3.353 23.056 4.14 23.362C4.902 23.659 5.775 23.862 7.053 23.92C8.333 23.978 8.741 23.992 12 23.992C15.259 23.992 15.667 23.978 16.947 23.92C18.225 23.862 19.098 23.659 19.86 23.362C20.647 23.056 21.314 22.644 21.981 21.977C22.648 21.31 23.06 20.643 23.366 19.856C23.663 19.094 23.866 18.221 23.924 16.943C23.982 15.663 23.996 15.255 23.996 11.996C23.996 8.737 23.982 8.329 23.924 7.049C23.866 5.771 23.663 4.898 23.366 4.136C23.06 3.349 22.648 2.682 21.981 2.015C21.314 1.348 20.647 0.936 19.86 0.63C19.098 0.333 18.225 0.13 16.947 0.072C15.667 0.014 15.259 0 12 0Z"/></svg>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
+              <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+              <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+              <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+            </svg>
           </a>
           <!-- LinkedIn -->
           <a href="https://www.linkedin.com/company/visualmax-tanzania/?viewAsMember=true" target="_blank" rel="noopener noreferrer" class="social-btn" aria-label="LinkedIn">
@@ -63,7 +99,7 @@
             <li><NuxtLink to="/"><span class="arrow">›</span> Home</NuxtLink></li>
             <li><NuxtLink to="/#services"><span class="arrow">›</span> Our services</NuxtLink></li>
             <li><NuxtLink to="/team"><span class="arrow">›</span> About us</NuxtLink></li>
-            <li><NuxtLink to="/contact"><span class="arrow">›</span> Contact us</NuxtLink></li>
+            <li><NuxtLink to="#contact"><span class="arrow">›</span> Contact us</NuxtLink></li>
           </ul>
         </div>
 
@@ -83,13 +119,187 @@
   </footer>
 </template>
 
+<script setup lang="ts">
+import { ref, onMounted, onUnmounted } from 'vue'
+
+const slides = [
+  '/images/slide/slide1.png',
+  '/images/slide/slide2.png',
+  '/images/slide/slide3.png',
+  '/images/slide/slide4.png'
+]
+const currentSlide = ref(0)
+let slideInterval: any = null
+
+const form = ref({
+  name: '',
+  email: '',
+  subject: '',
+  message: ''
+})
+const isSubmitting = ref(false)
+
+onMounted(() => {
+  slideInterval = setInterval(() => {
+    currentSlide.value = (currentSlide.value + 1) % slides.length
+  }, 5000)
+})
+
+onUnmounted(() => {
+  if (slideInterval) clearInterval(slideInterval)
+})
+
+const submitContact = () => {
+  isSubmitting.value = true
+  setTimeout(() => {
+    isSubmitting.value = false
+    alert("Message sent successfully! We will get in touch with you shortly.")
+    form.value = { name: '', email: '', subject: '', message: '' }
+  }, 1000)
+}
+</script>
+
 <style scoped>
 .the-footer {
   background-color: var(--background);
   color: var(--text);
-  padding: 80px 0 60px;
-  border-top: 1px solid var(--card-border);
+  border-top: none;
   transition: background-color 0.4s, color 0.4s;
+}
+
+/* Contact Hero Section */
+.footer-contact-hero {
+  position: relative;
+  width: 100%;
+  min-height: 850px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: #000;
+}
+
+.contact-slide-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  filter: brightness(0.6);
+  z-index: 0;
+}
+
+.fade-slide-enter-active,
+.fade-slide-leave-active {
+  transition: opacity 1.5s ease-in-out;
+}
+.fade-slide-enter-from,
+.fade-slide-leave-to {
+  opacity: 0;
+}
+
+.contact-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to top, var(--background) 0%, transparent 15%);
+  z-index: 1;
+}
+
+.contact-box-container {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 1200px;
+  display: flex;
+  justify-content: center;
+  padding: 40px 20px;
+}
+
+.contact-box {
+  background: #ffffff;
+  width: 100%;
+  max-width: 550px;
+  padding: 60px 50px;
+  border-radius: 8px;
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4);
+}
+
+.contact-title {
+  font-size: 52px;
+  font-weight: 900;
+  color: #111;
+  line-height: 1.1;
+  margin-bottom: 40px;
+  text-transform: capitalize;
+  letter-spacing: -1px;
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.contact-input {
+  width: 100%;
+  padding: 16px 20px;
+  background: #f4f5f7;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  font-size: 15px;
+  color: #333;
+  font-family: inherit;
+  transition: all 0.3s;
+}
+
+.contact-input::placeholder {
+  color: #aaa;
+}
+
+.contact-input:focus {
+  outline: none;
+  background: #fff;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(249, 168, 34, 0.1);
+}
+
+.textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+.submit-collab-btn {
+  width: 100%;
+  background: var(--accent);
+  color: #111;
+  padding: 18px;
+  border-radius: 50px;
+  font-size: 17px;
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: all 0.3s;
+}
+
+.submit-collab-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(249, 168, 34, 0.4);
+  background: #ffb833;
+}
+
+.submit-collab-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.main-footer-container {
+  padding-top: 100px;
 }
 
 .container {
@@ -106,7 +316,7 @@
 }
 
 .footer-logo img {
-  height: 60px;
+  height: 90px;
   object-fit: contain;
 }
 
@@ -225,6 +435,16 @@
 }
 
 @media (max-width: 600px) {
+  .footer-contact-hero {
+    min-height: 700px;
+  }
+  .contact-box {
+    padding: 40px 25px;
+  }
+  .contact-title {
+    font-size: 40px;
+  }
+  
   .footer-top {
     flex-direction: column;
     gap: 30px;

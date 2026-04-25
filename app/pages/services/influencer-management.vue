@@ -70,7 +70,7 @@ onMounted(() => {
 </script>
 
 <style scoped>
-.service-page { padding-top: 96px; background: var(--background); color: var(--text); min-height: 100vh; font-family: 'Poppins', sans-serif; transition: background-color 0.4s, color 0.4s; }
+.service-page { background: var(--background); color: var(--text); min-height: 100vh; font-family: 'Poppins', sans-serif; transition: background-color 0.4s, color 0.4s; }
 
 .influencer-hero { height: 60vh; display: flex; align-items: center; justify-content: center; text-align: center; position: relative; overflow: hidden; }
 .hero-bg { position: absolute; top:0; left:0; width:100%; height:100%; background: url('/images/ourwork/influencer.png') center/cover; z-index: 0; filter: brightness(1); /* Made brighter to be seen clearly */ }
