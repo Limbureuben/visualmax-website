@@ -33,7 +33,7 @@
               <NuxtLink to="/services/creative-design" class="dropdown-item" @click="isServicesOpen = false">Creative Design</NuxtLink>
             </div>
           </div>
-          <NuxtLink to="/team" class="nav-link">About Us</NuxtLink>
+
         </nav>
 
         <div class="header-actions">
@@ -74,7 +74,7 @@
                  <NuxtLink to="/services/creative-design" class="mobile-sub" @click="isMenuOpen = false">Creative Design</NuxtLink>
                </div>
             </div>
-            <NuxtLink to="/team" class="mobile-link" @click="isMenuOpen = false">About Us</NuxtLink>
+
             <button @click="$emit('open-booking'); isMenuOpen = false" class="booking-btn-mobile">Book Now</button>
           </nav>
         </div>
@@ -291,8 +291,8 @@ onUnmounted(() => {
 }
 
 .booking-btn {
-  background: var(--secondary); /* Brand Blue */
-  color: #FFFFFF;
+  background: var(--accent); /* Brand Yellow */
+  color: #111;
   padding: 12px 24px;
   border-radius: 8px; /* Requested 8px */
   font-weight: 700;
@@ -426,7 +426,7 @@ onUnmounted(() => {
 .booking-btn-mobile {
   margin-top: 20px;
   background: var(--accent);
-  color: white;
+  color: #111;
   padding: 15px;
   border-radius: 8px;
   border: none;

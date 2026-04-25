@@ -5,6 +5,7 @@
     <WhoWeAre />
     <OurWork />
     <ExtensionTeam />
+    <AboutUsSection />
     <PreparedPowered />
     <PartnersSection />
     <PartnershipSection />

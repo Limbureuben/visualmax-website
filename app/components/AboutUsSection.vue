@@ -53,27 +53,7 @@
         </div>
       </section>
 
-      <!-- Second Team section or stats if needed -->
-      <!-- Values Section -->
-      <section class="team-values container">
-        <div class="values-grid">
-          <div class="value-card reveal-item" style="--delay: 1">
-            <div class="v-icon">✨</div>
-            <h3>Innovation</h3>
-            <p>We leverage the latest technology to bring your wildest ideas to life with precision and style.</p>
-          </div>
-          <div class="value-card reveal-item" style="--delay: 2">
-            <div class="v-icon">🤝</div>
-            <h3>Collaboration</h3>
-            <p>Your vision, our expertise. We work as an extension of your team to ensure every detail is perfect.</p>
-          </div>
-          <div class="value-card reveal-item" style="--delay: 3">
-            <div class="v-icon">🎯</div>
-            <h3>Excellence</h3>
-            <p>We don't just deliver content; we deliver results that exceed expectations and resonate with audiences.</p>
-          </div>
-        </div>
-      </section>
+      <!-- Bottom of About Us omitted -->
     </main>
   </div>
 </template>
@@ -143,9 +123,9 @@ onMounted(() => {
 }
 
 .team-hero {
-  padding: 180px 0 120px;
+  padding: 100px 0 100px;
   position: relative;
-  min-height: 100vh;
+  min-height: 80vh;
   display: flex;
   align-items: center;
 }
