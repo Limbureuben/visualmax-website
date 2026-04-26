@@ -95,7 +95,7 @@ const isHomePage = computed(() => route.path === '/')
 const isScrolled = ref(false)
 const isMenuOpen = ref(false)
 const isServicesOpen = ref(false)
-const isDarkMode = ref(true)
+const isDarkMode = ref(false)
 
 const handleScroll = () => {
   isScrolled.value = window.scrollY > 50
@@ -125,7 +125,7 @@ onMounted(() => {
   window.addEventListener('click', () => { isServicesOpen.value = false })
   
   const savedTheme = localStorage.getItem('theme')
-  if (savedTheme === 'light') isDarkMode.value = false
+  if (savedTheme === 'dark') isDarkMode.value = true
   updateTheme()
 })
 

@@ -45,10 +45,10 @@ const setupObserver = () => {
 onMounted(() => {
   // Global theme initialization
   const savedTheme = localStorage.getItem('theme')
-  if (savedTheme === 'light') {
-    document.documentElement.classList.add('light-mode')
-  } else {
+  if (savedTheme === 'dark') {
     document.documentElement.classList.remove('light-mode')
+  } else {
+    document.documentElement.classList.add('light-mode')
   }
 
   // Initial observer setup
