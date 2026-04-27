@@ -7,7 +7,7 @@
         <!-- Left Image -->
         <div class="who-image-col reveal-on-scroll delay-100 slide-left">
           <div class="image-wrapper">
-            <img src="/images/whoweare/image1.png" alt="Creative Production" />
+            <img src="/images/whoweare/who1.jpeg" alt="Creative Production" />
           </div>
         </div>
 
@@ -24,7 +24,7 @@
         <!-- Right Image -->
         <div class="who-image-col reveal-on-scroll delay-300 slide-right">
           <div class="image-wrapper">
-            <img src="/images/whoweare/weareimage.png" alt="Photography Expertise" />
+            <img src="/images/whoweare/who2.jpeg" alt="Photography Expertise" />
           </div>
         </div>
       </div>

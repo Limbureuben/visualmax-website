@@ -10,7 +10,7 @@
         <!-- Left Image -->
         <div class="extension-image-col reveal-on-scroll delay-100 slide-left">
           <div class="image-container">
-            <img src="/images/extension/extensionimage.jpg" alt="Professional Camera Setup" />
+            <img src="/images/whoweare/team1.png" alt="Extension of Your Team" />
           </div>
         </div>
 
