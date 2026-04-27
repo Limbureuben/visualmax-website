@@ -36,7 +36,7 @@
            </div>
            <div class="pod-image-block floating-image reveal-item">
               <div class="image-reveal-wrapper">
-                <img src="/images/services/podcast1.jpeg" alt="Podcast Studio" class="large-display-img" />
+                <img src="/images/ourwork/pod1.png" alt="Podcast Studio" class="large-display-img" />
               </div>
            </div>
         </div>

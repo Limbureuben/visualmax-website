@@ -10,7 +10,7 @@
       <!-- Right Image -->
       <div class="partnership-img-col reveal-on-scroll delay-200">
         <div class="img-box">
-          <img src="/images/ourwork/work1.jpeg" alt="Partner with Visualmax" />
+          <img src="/images/ourwork/creative1.png" alt="Partner with Visualmax" />
         </div>
       </div>
     </div>
