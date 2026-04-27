@@ -210,9 +210,7 @@ onUnmounted(() => {
   display: none; /* Hide scrollbar for Chrome, Safari and Opera */
 }
 
-.work-slider-container:hover .work-slider {
-  /* Pause animation hint? Or just stop interval in script */
-}
+
 
 .work-item {
   flex: 0 0 calc(33.333% - 20px); /* 3 images visible */
